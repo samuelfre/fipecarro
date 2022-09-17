@@ -138,7 +138,9 @@ const Home: NextPage<{
         <meta name="description" content="Tabela Fipe de Carros" />
         <link rel="icon" href="/favicon.ico" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6774604341550272"
-     crossOrigin="anonymous"></script>
+          crossOrigin="anonymous"></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6774604341550272"
+          crossOrigin="anonymous"></script>
       </Head>
 
       <main className={styles.main}>
