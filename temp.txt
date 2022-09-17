@@ -1,0 +1,100 @@
+//Consultar Marcas
+fetch("https://veiculos.fipe.org.br/api/veiculos//ConsultarMarcas", {
+  "headers": {
+    "accept": "application/json, text/javascript, */*; q=0.01",
+    "accept-language": "pt-BR,pt;q=0.7",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "sec-gpc": "1",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "https://veiculos.fipe.org.br/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "codigoTabelaReferencia=289&codigoTipoVeiculo=1",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+
+//Consultar Modelos
+fetch("https://veiculos.fipe.org.br/api/veiculos//ConsultarModelos", {
+  "headers": {
+    "accept": "application/json, text/javascript, */*; q=0.01",
+    "accept-language": "pt-BR,pt;q=0.7",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "sec-gpc": "1",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "https://veiculos.fipe.org.br/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "codigoTipoVeiculo=1&codigoTabelaReferencia=289&codigoModelo=&codigoMarca=26&ano=&codigoTipoCombustivel=&anoModelo=&modeloCodigoExterno=",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+
+//Consultar Ano Modelo
+fetch("https://veiculos.fipe.org.br/api/veiculos//ConsultarAnoModelo", {
+  "headers": {
+    "accept": "application/json, text/javascript, */*; q=0.01",
+    "accept-language": "pt-BR,pt;q=0.7",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "sec-gpc": "1",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "https://veiculos.fipe.org.br/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "codigoTipoVeiculo=1&codigoTabelaReferencia=289&codigoModelo=6205&codigoMarca=26&ano=&codigoTipoCombustivel=&anoModelo=&modeloCodigoExterno=",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+
+//Consultar Modelos Através do Ano
+fetch("https://veiculos.fipe.org.br/api/veiculos//ConsultarModelosAtravesDoAno", {
+  "headers": {
+    "accept": "application/json, text/javascript, */*; q=0.01",
+    "accept-language": "pt-BR,pt;q=0.7",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "sec-gpc": "1",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "https://veiculos.fipe.org.br/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "codigoTipoVeiculo=1&codigoTabelaReferencia=289&codigoModelo=6205&codigoMarca=26&ano=2014-1&codigoTipoCombustivel=1&anoModelo=2014&modeloCodigoExterno=",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+
+
+//Consultar todos os parâmetros
+fetch("https://veiculos.fipe.org.br/api/veiculos//ConsultarValorComTodosParametros", {
+  "headers": {
+    "accept": "application/json, text/javascript, */*; q=0.01",
+    "accept-language": "pt-BR,pt;q=0.7",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "sec-gpc": "1",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "https://veiculos.fipe.org.br/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "codigoTabelaReferencia=289&codigoMarca=26&codigoModelo=6205&codigoTipoVeiculo=1&anoModelo=2014&codigoTipoCombustivel=1&tipoVeiculo=carro&modeloCodigoExterno=&tipoConsulta=tradicional",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
