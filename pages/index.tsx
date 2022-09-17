@@ -135,10 +135,9 @@ const Home: NextPage<{
     <div className={styles.container}>
       <Head>
         <title>Fipe Carro</title>
-        <meta name="description" content="Tabela Fipe de Carros" />
+        <meta name="description" content="Tabela Fipe 2022 de Carros" />
+        <meta name="keywords" content="tabela fipe, tabela fipe 2022, fipe carros, fipe veiculos, tabela fipe carros, tabela fipe motos, tabela fipe moto, tabela fipe veiculos"></meta>
         <link rel="icon" href="/favicon.ico" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6774604341550272"
-          crossOrigin="anonymous"></script>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6774604341550272"
           crossOrigin="anonymous"></script>
       </Head>
