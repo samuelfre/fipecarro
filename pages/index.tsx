@@ -10,16 +10,19 @@ const urlTabelFipe = 'https://fipecarro.com.br/'
 
 const fipeURL = () => 'https://www.fipe.org.br/Content/img/logo_fipe.png' //Logo
 
-const Home: NextPage<{ 
-  MARCA: Marca, 
-  data: string, 
-  codigoTabelaReferencia: number, 
+const Home: NextPage<{
+  MARCA: Marca,
+  data: string,
+  codigoTabelaReferencia: number,
   codigoTipoVeiculo: number,
   url_ConsultarModelos: string,
   url_ConsultarAnoModelo: string,
-  url_ConsultarValorComTodosParametros: string
+  url_ConsultarValorComTodosParametros: string,
+  url_interna_consultaranomodelo: string,
+  url_interna_consultarmodelos: string,
+  url_interna_consultarvalorcomtodosparametros: string
 
-}> = ({ MARCA, data, codigoTabelaReferencia, codigoTipoVeiculo, url_ConsultarModelos, url_ConsultarAnoModelo, url_ConsultarValorComTodosParametros }) => {
+}> = ({ MARCA, data, codigoTabelaReferencia, codigoTipoVeiculo, url_ConsultarModelos, url_ConsultarAnoModelo, url_ConsultarValorComTodosParametros, url_interna_consultaranomodelo, url_interna_consultarmodelos, url_interna_consultarvalorcomtodosparametros }) => {
 
   const [filtro, setFiltro] = useState<{
     indexMarca: string,
@@ -39,10 +42,6 @@ const Home: NextPage<{
 
   //CLIQUE NA MARCA
   const handleMarca = async (event: ChangeEvent<HTMLSelectElement>) => {
-    // setFiltro({
-    //   marca: event.target.value,
-    //   Modelos: ModelosAnos.Modelos
-    // })
     const bodyModelos: IbodyConsultarModelos = {
       codigoTipoVeiculo: codigoTipoVeiculo,
       codigoTabelaReferencia: codigoTabelaReferencia,
@@ -53,29 +52,12 @@ const Home: NextPage<{
       anoModelo: '',
       modeloCodigoExterno: ''
     }
-    const modelosAnos = await request<ModelosAnos>(url_ConsultarModelos, {
+    const modelosAnos = await request<ModelosAnos>(url_interna_consultarmodelos, {
       'method': 'POST',
-      'headers': {
-        'authority': 'veiculos.fipe.org.br',
-        'accept': 'application/json, text/javascript, */*; q=0.01',
-        'accept-language': 'pt-BR,pt;q=0.7',
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'cookie': 'ROUTEID=.5',
-        'origin': 'https://veiculos.fipe.org.br',
-        'referer': 'https://veiculos.fipe.org.br/',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'sec-gpc': '1',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-        'x-requested-with': 'XMLHttpRequest'
-      },
-      body: JSON.stringify(bodyModelos)
-        .replaceAll("\"", "")
-        .replaceAll(":", "=")
-        .replaceAll(",", "&")
-        .replaceAll("{", "")
-        .replaceAll("}", "")
+      body: JSON.stringify({
+        url_ConsultarModelos: url_ConsultarModelos,
+        bodyModelos: bodyModelos
+      })
     })
     setFiltro({
       indexMarca: event.target.value,
@@ -98,29 +80,12 @@ const Home: NextPage<{
       anoModelo: '',
       modeloCodigoExterno: ''
     }
-    const modelosAtravesDoAno = await request<ModelosAtravesDoAno>(url_ConsultarAnoModelo, {
+    const modelosAtravesDoAno = await request<ModelosAtravesDoAno>(url_interna_consultaranomodelo, {
       'method': 'POST',
-      'headers': {
-        'authority': 'veiculos.fipe.org.br',
-        'accept': 'application/json, text/javascript, */*; q=0.01',
-        'accept-language': 'pt-BR,pt;q=0.7',
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'cookie': 'ROUTEID=.5',
-        'origin': 'https://veiculos.fipe.org.br',
-        'referer': 'https://veiculos.fipe.org.br/',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'sec-gpc': '1',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-        'x-requested-with': 'XMLHttpRequest'
-      },
-      body: JSON.stringify(consultarAnoModelo)
-        .replaceAll("\"", "")
-        .replaceAll(":", "=")
-        .replaceAll(",", "&")
-        .replaceAll("{", "")
-        .replaceAll("}", "")
+      body: JSON.stringify({
+        url_ConsultarAnoModelo: url_ConsultarAnoModelo,
+        consultarAnoModelo: consultarAnoModelo
+      })
     })
 
     setFiltro({
@@ -133,10 +98,8 @@ const Home: NextPage<{
     })
   }
 
-  //CLIQUE NO ANO DO MODELO
+  // //CLIQUE NO ANO DO MODELO
   const handleAnoModelo = async (event: any) => {
-    console.log('entrou');
-
     const valorComTodosParametros: IbodyConsultarValorComTodosParametros = {
       codigoTabelaReferencia: codigoTabelaReferencia,
       codigoMarca: filtro.indexMarca,
@@ -148,29 +111,12 @@ const Home: NextPage<{
       modeloCodigoExterno: '',
       tipoConsulta: 'tradicional'
     }
-    const todosParametros = await request<ITodosOsParametros>(url_ConsultarValorComTodosParametros, {
+    const todosParametros = await request<ITodosOsParametros>(url_interna_consultarvalorcomtodosparametros, {
       'method': 'POST',
-      'headers': {
-        'authority': 'veiculos.fipe.org.br',
-        'accept': 'application/json, text/javascript, */*; q=0.01',
-        'accept-language': 'pt-BR,pt;q=0.7',
-        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'cookie': 'ROUTEID=.5',
-        'origin': 'https://veiculos.fipe.org.br',
-        'referer': 'https://veiculos.fipe.org.br/',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'sec-gpc': '1',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-        'x-requested-with': 'XMLHttpRequest'
-      },
-      body: JSON.stringify(valorComTodosParametros)
-        .replaceAll("\"", "")
-        .replaceAll(":", "=")
-        .replaceAll(",", "&")
-        .replaceAll("{", "")
-        .replaceAll("}", "")
+      body: JSON.stringify({
+        url_ConsultarValorComTodosParametros: url_ConsultarValorComTodosParametros,
+        valorComTodosParametros: valorComTodosParametros
+      })
     })
     setFiltro({
       marca: filtro.marca,
@@ -183,7 +129,6 @@ const Home: NextPage<{
       dataConsulta: new Date().toLocaleString()
     })
   }
-
   if (!filtro.marca) return <Loading />
 
   return (
@@ -288,6 +233,9 @@ export async function getServerSideProps() {
   const url_ConsultarModelos = process.env.URL_CONSULTARMODELOS as string
   const url_ConsultarAnoModelo = process.env.URL_CONSULTARANOMODELO as string
   const url_ConsultarValorComTodosParametros = process.env.URL_CONSULTARVALORCOMTODOSPARAMETROS as string
+  const url_interna_consultaranomodelo = process.env.URL_INTERNA_CONSULTARANOMODELO as string
+  const url_interna_consultarmodelos = process.env.URL_INTERNA_CONSULTARMODELOS as string
+  const url_interna_consultarvalorcomtodosparametros = process.env.URL_INTERNA_CONSULTARVALORCOMTODOSPARAMETROS as string
 
   const codigoAtualizado = await fetch(url_TabelaReferencia, {
     "headers": {
@@ -346,7 +294,10 @@ export async function getServerSideProps() {
       codigoTipoVeiculo,
       url_ConsultarModelos,
       url_ConsultarAnoModelo,
-      url_ConsultarValorComTodosParametros
+      url_ConsultarValorComTodosParametros,
+      url_interna_consultaranomodelo,
+      url_interna_consultarmodelos,
+      url_interna_consultarvalorcomtodosparametros
     },
   }
 }
