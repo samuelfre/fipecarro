@@ -6,17 +6,16 @@ import Loading from '../components/loading'
 import styles from '../styles/Home.module.css'
 import { IbodyConsultarAnoModelo, IbodyConsultarMarcas, IbodyConsultarModelos, IbodyConsultarValorComTodosParametros, ITodosOsParametros, Marca, ModelosAnos, ModelosAtravesDoAno, request } from './api/hello'
 
-const urlTabelFipe = 'http://localhost:3000/'
+const urlTabelFipe = 'https://fipecarro.com.br/'
 const url_ConsultarMarcas = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarMarcas'
 const url_ConsultarModelos = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarModelos'
 const url_ConsultarAnoModelo = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarAnoModelo'
 const url_ConsultarValorComTodosParametros = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarValorComTodosParametros'
-
 const codigoTabelaReferencia = 289
 const codigoTipoVeiculo = 1
-
-
 const fipeURL = () => 'https://www.fipe.org.br/Content/img/logo_fipe.png' //Logo
+
+
 
 const Home: NextPage<{ MARCA:Marca, data:string }> = ({ MARCA, data }) => {
 
@@ -34,6 +33,7 @@ const Home: NextPage<{ MARCA:Marca, data:string }> = ({ MARCA, data }) => {
     indexModelo: '0',
     marca: MARCA,
   })
+
 
   //CLIQUE NA MARCA
   const handleMarca = async (event: ChangeEvent<HTMLSelectElement>) => {
@@ -189,7 +189,7 @@ const Home: NextPage<{ MARCA:Marca, data:string }> = ({ MARCA, data }) => {
       <Head>
         <title>Fipe Carro</title>
         <meta name="description" content="Tabela Fipe de Carros" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
@@ -211,8 +211,7 @@ const Home: NextPage<{ MARCA:Marca, data:string }> = ({ MARCA, data }) => {
         </div>
 
         <p className={styles.description}>
-          Faça uma busca do seu veículo abaixo.
-          {/* <code className={styles.code}>pages/index.tsx</code> */}
+          Faça uma busca do seu <span>carro</span> abaixo.
         </p>
         <div className={styles.separateCards}>
 
@@ -281,14 +280,29 @@ const Home: NextPage<{ MARCA:Marca, data:string }> = ({ MARCA, data }) => {
 }
 
 
-export async function getStaticProps() {
-
+export async function getStaticProps() {  
+  const codigoAtualizado = await fetch("https://veiculos.fipe.org.br/api/veiculos//ConsultarTabelaDeReferencia", {
+    "headers": {
+      "accept": "application/json, text/javascript, */*; q=0.01",
+      "accept-language": "pt-BR,pt;q=0.7",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "sec-gpc": "1",
+      "x-requested-with": "XMLHttpRequest"
+    },
+    "referrer": "https://veiculos.fipe.org.br/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": null,
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "include"
+  }).then(value => value.json());
+  const data = codigoAtualizado[0].Mes
   const bodyMarcas: IbodyConsultarMarcas = {
-    codigoTabelaReferencia: codigoTabelaReferencia,
-    codigoTipoVeiculo: codigoTipoVeiculo
+    codigoTabelaReferencia: codigoAtualizado[0].Codigo,
+    codigoTipoVeiculo: 1
   }
-  const data = new Date().toLocaleDateString('pt-Br').slice(4)
-
   const MARCA = await request<Marca>(url_ConsultarMarcas, {
     "headers": {
       "accept": "application/json, text/javascript, */*; q=0.01",

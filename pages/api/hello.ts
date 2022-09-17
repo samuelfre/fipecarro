@@ -16,12 +16,14 @@ export async function request<TResponse>(
     // data-transformations in the last `then` clause.
 }
 
+
+//------------------ Resposta de IbodyConsultarMarcas
 export type Marca = IMarca[]
 export interface IMarca {
   Label: string
   Value: string
 }
-//------------------
+//------------------ Resposta de IbodyConsultarModelos
 
 export interface ModelosAnos {
   Modelos: Modelo[]
@@ -37,7 +39,7 @@ export interface Ano {
   Label: string
   Value: string
 }
-//--------------------
+//-------------------- Resposta de IbodyConsultarAnoModelo
 
 export type ModelosAtravesDoAno = IModelosAtravesDoAno[]
 
@@ -46,7 +48,7 @@ export interface IModelosAtravesDoAno {
   Value: string
 }
 
-//-------------------------
+//------------------------- Resposta de IbodyConsultarValorComTodosParametros
 
 export interface ITodosOsParametros {
   Valor: string
@@ -61,16 +63,7 @@ export interface ITodosOsParametros {
   SiglaCombustivel: string
   DataConsulta: string
 }
-
-
-
-
-
-
-
-
-
-
+//-------------------------//-------------------------//-------------------------//-------------------------
 
 
 
@@ -89,14 +82,6 @@ export interface IbodyConsultarModelos {
   anoModelo: string
   modeloCodigoExterno: string  
 }
-  //codigoTipoVeiculo=1
-// &codigoTabelaReferencia=289
-// &codigoModelo=6205
-// &codigoMarca=26
-// &ano=
-// &codigoTipoCombustivel=
-// &anoModelo=
-// &modeloCodigoExterno=
 export interface IbodyConsultarAnoModelo {
   codigoTipoVeiculo: number
   codigoTabelaReferencia: number
@@ -107,26 +92,6 @@ export interface IbodyConsultarAnoModelo {
   anoModelo: string
   modeloCodigoExterno: string  
 }
-export interface IbodyConsultarModelosAtravesDoAno {
-  codigoTipoVeiculo: number
-  codigoTabelaReferencia: number
-  codigoModelo: number
-  codigoMarca: number
-  ano: number
-  codigoTipoCombustivel:number
-  anoModelo: number
-  modeloCodigoExterno: number  
-}
-// codigoTabelaReferencia=289
-// &codigoMarca=26
-// &codigoModelo=6205
-// &codigoTipoVeiculo=1
-// &anoModelo=2014
-// &codigoTipoCombustivel=1
-// &tipoVeiculo=carro
-// &modeloCodigoExterno=
-// &tipoConsulta=tradicional
-
 export interface IbodyConsultarValorComTodosParametros {
   codigoTabelaReferencia: number
   codigoMarca: string

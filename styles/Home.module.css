@@ -70,6 +70,9 @@
   line-height: 1.5;
   font-size: 1.5rem;
 }
+.description span {
+  color: red;
+}
 
 .card {
   display: flex;
@@ -121,7 +124,7 @@
 .divCard {
   display: flex;
   width: 30vw;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 @media (max-width: 768px) {
