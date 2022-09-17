@@ -7,17 +7,19 @@ import styles from '../styles/Home.module.css'
 import { IbodyConsultarAnoModelo, IbodyConsultarMarcas, IbodyConsultarModelos, IbodyConsultarValorComTodosParametros, ITodosOsParametros, Marca, ModelosAnos, ModelosAtravesDoAno, request } from './api/hello'
 
 const urlTabelFipe = 'https://fipecarro.com.br/'
-const url_ConsultarMarcas = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarMarcas'
-const url_ConsultarModelos = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarModelos'
-const url_ConsultarAnoModelo = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarAnoModelo'
-const url_ConsultarValorComTodosParametros = 'https://veiculos.fipe.org.br/api/veiculos//ConsultarValorComTodosParametros'
-const codigoTabelaReferencia = 289
-const codigoTipoVeiculo = 1
+
 const fipeURL = () => 'https://www.fipe.org.br/Content/img/logo_fipe.png' //Logo
 
+const Home: NextPage<{ 
+  MARCA: Marca, 
+  data: string, 
+  codigoTabelaReferencia: number, 
+  codigoTipoVeiculo: number,
+  url_ConsultarModelos: string,
+  url_ConsultarAnoModelo: string,
+  url_ConsultarValorComTodosParametros: string
 
-
-const Home: NextPage<{ MARCA:Marca, data:string }> = ({ MARCA, data }) => {
+}> = ({ MARCA, data, codigoTabelaReferencia, codigoTipoVeiculo, url_ConsultarModelos, url_ConsultarAnoModelo, url_ConsultarValorComTodosParametros }) => {
 
   const [filtro, setFiltro] = useState<{
     indexMarca: string,
@@ -280,8 +282,14 @@ const Home: NextPage<{ MARCA:Marca, data:string }> = ({ MARCA, data }) => {
 }
 
 
-export async function getStaticProps() {  
-  const codigoAtualizado = await fetch("https://veiculos.fipe.org.br/api/veiculos//ConsultarTabelaDeReferencia", {
+export async function getServerSideProps() {
+  const url_TabelaReferencia = process.env.URL_TABELAREFERENCIA as string
+  const url_ConsultarMarcas = process.env.URL_CONSULTARMARCAS as string
+  const url_ConsultarModelos = process.env.URL_CONSULTARMODELOS as string
+  const url_ConsultarAnoModelo = process.env.URL_CONSULTARANOMODELO as string
+  const url_ConsultarValorComTodosParametros = process.env.URL_CONSULTARVALORCOMTODOSPARAMETROS as string
+
+  const codigoAtualizado = await fetch(url_TabelaReferencia, {
     "headers": {
       "accept": "application/json, text/javascript, */*; q=0.01",
       "accept-language": "pt-BR,pt;q=0.7",
@@ -303,6 +311,9 @@ export async function getStaticProps() {
     codigoTabelaReferencia: codigoAtualizado[0].Codigo,
     codigoTipoVeiculo: 1
   }
+  const codigoTabelaReferencia = codigoAtualizado[0].Codigo
+  const codigoTipoVeiculo = 1
+
   const MARCA = await request<Marca>(url_ConsultarMarcas, {
     "headers": {
       "accept": "application/json, text/javascript, */*; q=0.01",
@@ -330,7 +341,12 @@ export async function getStaticProps() {
   return {
     props: {
       MARCA,
-      data
+      data,
+      codigoTabelaReferencia,
+      codigoTipoVeiculo,
+      url_ConsultarModelos,
+      url_ConsultarAnoModelo,
+      url_ConsultarValorComTodosParametros
     },
   }
 }
