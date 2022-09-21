@@ -39,6 +39,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       `,
       }}
     />
+    <Script
+      id="Adsense-id"
+      data-ad-client="ca-pub-6774604341550272"
+      async
+      strategy="beforeInteractive"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    />
+    {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6774604341550272"
+      crossOrigin="anonymous"></script> */}
     <Component {...pageProps} />
   </>
 }

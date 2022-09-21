@@ -1,0 +1,5 @@
+WP PLUGINS
+https://github.com/wp-graphql/wp-graphql/releases - WP-GRAPHQL MAIN
+https://github.com/wp-graphql/wp-graphql-acf - WP-GRAPHQL to ACF
+
+https://www.advancedcustomfields.com/ - LINK to ACF

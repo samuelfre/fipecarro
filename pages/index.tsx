@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
+import Script from 'next/script'
 import { ChangeEvent, useState } from 'react'
 import Loading from '../components/loading'
 import styles from '../styles/Home.module.css'
@@ -138,8 +140,6 @@ const Home: NextPage<{
         <meta name="description" content="Tabela Fipe 2022 de Carros" />
         <meta name="keywords" content="tabela fipe, tabela fipe 2022, fipe carros, fipe veiculos, tabela fipe carros, tabela fipe motos, tabela fipe moto, tabela fipe veiculos"></meta>
         <link rel="icon" href="/favicon.ico" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6774604341550272"
-          crossOrigin="anonymous"></script>
       </Head>
 
       <main className={styles.main}>
@@ -220,9 +220,12 @@ const Home: NextPage<{
       </main>
 
       <footer className={styles.footer}>
+        <Link href={`/blog`}>
+        <a className="hover:underline">Blog</a>
+        </Link>
         <div>{`Última atualização: ${data}`}</div>
         <br />
-        <div>© 2022 Todos os direitos reservados à Fipe</div>
+        <div style={{ textAlign: 'center' }}>© 2022 Todos os direitos reservados à Fipe</div>
       </footer>
     </div>
   )
@@ -239,7 +242,7 @@ export async function getServerSideProps() {
   const url_interna_consultaranomodelo = process.env.URL_INTERNA_CONSULTARANOMODELO as string
   const url_interna_consultarmodelos = process.env.URL_INTERNA_CONSULTARMODELOS as string
   const url_interna_consultarvalorcomtodosparametros = process.env.URL_INTERNA_CONSULTARVALORCOMTODOSPARAMETROS as string
-
+  
   const codigoAtualizado = await fetch(url_TabelaReferencia, {
     "headers": {
       "accept": "application/json, text/javascript, */*; q=0.01",
