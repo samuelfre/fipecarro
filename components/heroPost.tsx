@@ -8,6 +8,7 @@ import CoverImage from './cover-image'
 interface IHeroPost {
     edges: Edge
 }
+
 const HeroPost = (props: IHeroPost) => {
     return (
         <section>

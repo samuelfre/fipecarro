@@ -1,9 +1,7 @@
 import { GetStaticProps, NextPage } from 'next'
 import React from 'react'
-import { AllPostForHome, Posts } from '../types/types'
-import { getAllPostsForHome } from './api/apiBlog'
-import Image from 'next/image'
-import Link from 'next/link'
+import { Posts } from '../types/types'
+import { getAllPostsForHome, getPostAndMorePosts } from './api/apiBlog'
 import styles from '../styles/Blog.module.css'
 import Head from 'next/head'
 import HeroPost from '../components/heroPost'
@@ -25,7 +23,6 @@ const blog: NextPage<{
         edges.map((value, index) => <HeroPost key={index} edges={value}></HeroPost>)
       }
 
-
     </div>
   )
 }
@@ -34,7 +31,7 @@ export default blog
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPosts = await getAllPostsForHome()
-
+  
   return {
     props: { allPosts },
     revalidate: 10,
