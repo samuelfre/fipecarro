@@ -5,6 +5,9 @@ import { getAllPostsWithSlug, getPostAndMorePosts } from '../api/apiBlog'
 import Head from 'next/head'
 import { Post } from '../../types/postTypes'
 import { Posts } from '../../types/postsType'
+import PostHeader from '../../components/post-header'
+import PostBody from '../../components/post-body'
+import Tags from '../../components/tags'
 
 const Post = ({ post, posts }: {
     post: Post,
@@ -12,7 +15,6 @@ const Post = ({ post, posts }: {
 }) => {
     const router = useRouter()
     const morePosts = posts?.edges
-console.log(post);
 
     if (!router.isFallback && !post?.slug) {
         // return <ErrorPage statusCode={404} />
@@ -20,26 +22,29 @@ console.log(post);
     }
     return (
         <>
-            <article>
+            <article style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }} >
                 <Head>
                     <title>
-                        {post.title} | Prisma Blog
+                        {post.title}
                     </title>
                     <meta
                         property="og:image"
                         content={post.featuredImage?.node.sourceUrl}
                     />
                 </Head>
-                {/* <PostHeader
+                <PostHeader
                     title={post.title}
                     coverImage={post.featuredImage}
                     date={post.date}
-                    author={post.author}
                     categories={post.categories}
                 />
-                <PostBody content={post.content} /> */}
+                <PostBody content={post.content} />
                 <footer>
-                    {/* {post.tags.edges.length > 0 && <Tags tags={post.tags} />} */}
+                    {post.tags.edges.length > 0 && <Tags tags={post.tags} />}
                 </footer>
             </article>
 

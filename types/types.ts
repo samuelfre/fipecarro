@@ -1,3 +1,5 @@
+import { Categories } from '../types/postTypes'
+
 export interface AllPostForHome {
   data: Data
 }
@@ -74,7 +76,24 @@ export interface Post {
 
 export interface FeaturedImage {}
 
-export interface Categories {}
+export interface Root {
+  data: Data
+  extensions: Extensions
+}
+
+export interface Data {
+  categories: Categories
+}
+
+export interface Extensions {
+  debug: Debug[]
+}
+
+export interface Debug {
+  type: string
+  message: string
+}
+
 
 export interface Tags {}
 

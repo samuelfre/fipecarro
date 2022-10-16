@@ -4,7 +4,7 @@ import { Posts } from '../types/types'
 import { getAllPostsForHome, getPostAndMorePosts } from './api/apiBlog'
 import styles from '../styles/Blog.module.css'
 import Head from 'next/head'
-import HeroPost from '../components/heroPost'
+import HeroPost from '../components/hero-post'
 
 const blog: NextPage<{
   allPosts: Posts
