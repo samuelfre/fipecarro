@@ -38,5 +38,6 @@ export interface Edge2 {
 }
 
 export interface Node3 {
-  name: string
+  name: string,
+  slug: string
 }

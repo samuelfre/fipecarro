@@ -1,3 +1,4 @@
+import { AllTagsWithSlug } from "../../types/allTagsWithSlug"
 import { AllPostForHome, AllPostsWithSlug, PostAndMorePosts } from "../../types/types"
 
 const API_URL = process.env.WORDPRESS_API_URL as unknown
@@ -46,6 +47,21 @@ async function fetchAPI<T>(query = '', { variables }: Record<string, any> = {}) 
 //   return data.post
 // }
 
+export async function getAllTagsWithSlug() {
+  const { data } = await fetchAPI<AllTagsWithSlug>(`
+    {
+      tags {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `)
+  return data?.tags
+}
+
 export async function getAllPostsWithSlug() {
   const { data } = await fetchAPI<AllPostsWithSlug>(`
     {
@@ -65,7 +81,7 @@ export async function getAllPostsForHome(preview: any = false) {
   const { data } = await fetchAPI<AllPostForHome>(
     `
     query AllPosts {
-      posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
+      posts(first: 20, where: { orderby: { field: DATE, order: DESC }}) {
         edges {
           node {
             title
@@ -86,6 +102,39 @@ export async function getAllPostsForHome(preview: any = false) {
       variables: {
         onlyEnabled: !preview,
         preview,
+      },
+    }
+  )
+
+  return data?.posts
+}
+export async function getAllPostsForTag(tagSlugIn: string) {
+  const { data } = await fetchAPI<AllPostForHome>(
+    `
+    query AllPosts($tagSlugIn: [String]) {
+      posts(
+        first: 20
+        where: {orderby: {field: DATE, order: DESC}, tagSlugIn: $tagSlugIn}
+      ) {
+        edges {
+          node {
+            title
+            excerpt
+            slug
+            date
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+    {
+      variables: {
+        tagSlugIn: tagSlugIn
       },
     }
   )
@@ -124,7 +173,8 @@ export async function getPostAndMorePosts(slug: string, preview: boolean, previe
       tags {
         edges {
           node {
-            name
+            name,
+            slug
           }
         }
       }
@@ -166,7 +216,7 @@ export async function getPostAndMorePosts(slug: string, preview: boolean, previe
       },
     }
   )
-  
+
   // Draft posts may not have an slug
   if (isDraft) data.post.slug = postPreview.id
   // Apply a revision (changes in a published post)

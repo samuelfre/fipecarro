@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import { Tags } from '../types/postTypes'
 
@@ -24,7 +25,11 @@ const Tags = ({ tags }: ITags) => {
                         marginLeft: '1rem',
                         fontWeight: 'normal'
                     }}>
-                        {tag.node.name}
+                        <Link href={`/tags/${tag.node.slug}`}>
+                            <a
+                                dangerouslySetInnerHTML={{ __html: tag.node.name }}
+                            />
+                        </Link>
                     </span>
                 ))}
             </p>

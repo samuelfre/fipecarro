@@ -220,9 +220,9 @@ const Home: NextPage<{
       </main>
 
       <footer className={styles.footer}>
-        <Link href={`/blog`}>
-        <a className="hover:underline">Blog</a>
-        </Link>
+        <h1><Link href={`/blog`}>
+          <a className="hover:underline">Acesse nosso blog!</a>
+        </Link></h1>
         <div>{`Última atualização: ${data}`}</div>
         <br />
         <div style={{ textAlign: 'center' }}>© 2022 Todos os direitos reservados à Fipe</div>
@@ -242,7 +242,7 @@ export async function getServerSideProps() {
   const url_interna_consultaranomodelo = process.env.URL_INTERNA_CONSULTARANOMODELO as string
   const url_interna_consultarmodelos = process.env.URL_INTERNA_CONSULTARMODELOS as string
   const url_interna_consultarvalorcomtodosparametros = process.env.URL_INTERNA_CONSULTARVALORCOMTODOSPARAMETROS as string
-  
+
   const codigoAtualizado = await fetch(url_TabelaReferencia, {
     "headers": {
       "accept": "application/json, text/javascript, */*; q=0.01",
