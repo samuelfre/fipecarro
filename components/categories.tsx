@@ -1,5 +1,5 @@
 import React from 'react'
-import { Categories } from '../types/types'
+import { Categories } from '../types/postTypes'
 
 
 interface ICategories {
