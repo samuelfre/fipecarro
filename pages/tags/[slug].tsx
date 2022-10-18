@@ -3,7 +3,6 @@ import React from 'react'
 import { getAllPostsForTag, getAllTagsWithSlug } from '../api/apiBlog'
 import { Posts } from '../../types/postsType'
 import HeroPost from '../../components/hero-post'
-import { ParsedUrlQuery } from 'querystring'
 
 
 const Tag = ({ posts, title }: { posts: Posts, title: string }) => {
@@ -16,7 +15,7 @@ const Tag = ({ posts, title }: { posts: Posts, title: string }) => {
         }}>
             <h1>{'Tag: ' + title}</h1>
             {
-                posts.edges.map((value, index) => <HeroPost key={index} edges={value}></HeroPost>)
+                posts.edges?.map((value, index) => <HeroPost key={index} edges={value}></HeroPost>)
             }
         </div>
     )
@@ -39,7 +38,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const allTags = await getAllTagsWithSlug()
 
     return {
-        paths: allTags.edges.map(({ node }) => `/tags/${node.slug}`) || [''],
+        paths: allTags.edges?.map(({ node }) => `/tags/${node.slug}`) || [''],
         fallback: true,
     }
 }
