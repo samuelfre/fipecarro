@@ -9,15 +9,15 @@ interface ICategories {
 const Categoriess = ({categories} : ICategories) => {
     return (
         <span style={{
-            marginLeft: '1.25rem'
+            fontWeight: 'bold',
+            marginLeft: '0.555rem'
         }}>
-            Categoria:
             {categories.edges.length > 0 ? (
                 categories.edges.map((category, index) => (
                     <span key={index} style={{
                         marginLeft: '0.25rem'
                     }}>
-                        {category.node.name}
+                        {(category.node.name === 'Uncategorized') ? '' : category.node.name}
                     </span>
                 ))
             ) : (
