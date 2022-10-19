@@ -8,7 +8,7 @@ import Loading from '../components/loading'
 import styles from '../styles/Home.module.css'
 import { IbodyConsultarAnoModelo, IbodyConsultarMarcas, IbodyConsultarModelos, IbodyConsultarValorComTodosParametros, ITodosOsParametros, Marca, ModelosAnos, ModelosAtravesDoAno, request } from './api/hello'
 
-const urlTabelFipe = 'https://fipecarro.com.br/'
+export const urlTabelFipe = 'https://fipecarro.com.br/'
 
 const fipeURL = () => 'https://www.fipe.org.br/Content/img/logo_fipe.png' //Logo
 

@@ -8,6 +8,9 @@ import { Posts } from '../../types/postsType'
 import PostHeader from '../../components/post-header'
 import PostBody from '../../components/post-body'
 import Tags from '../../components/tags'
+import styles from '../../styles/Home.module.css'
+import { urlTabelFipe } from '..'
+
 
 const Post = ({ post, posts }: {
     post: Post,
@@ -21,13 +24,14 @@ const Post = ({ post, posts }: {
         return <div>Error 404</div>
     }
 
-    if(!post) return (<div>Loading...</div>)
+    if (!post) return (<div>Loading...</div>)
     return (
         <>
             <article style={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                marginTop: '4rem'
             }} >
                 <Head>
                     <title>
@@ -38,6 +42,9 @@ const Post = ({ post, posts }: {
                         content={post?.featuredImage.node.sourceUrl}
                     />
                 </Head>
+                <h1 className={styles.title}>
+                    Consulte agora a <a href={`${urlTabelFipe}`}>Tabela Fipe!</a>
+                </h1>
                 <PostHeader
                     title={post?.title}
                     coverImage={post?.featuredImage}
